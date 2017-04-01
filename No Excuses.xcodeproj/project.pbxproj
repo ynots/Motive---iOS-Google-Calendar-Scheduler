@@ -7,15 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		291738B51E8F2ABA00CDAC8F /* client_812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com.plist in Resources */ = {isa = PBXBuildFile; fileRef = 291738B41E8F2ABA00CDAC8F /* client_812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com.plist */; };
+		291738B71E8F311900CDAC8F /* DailyCalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291738B61E8F311900CDAC8F /* DailyCalendarVC.swift */; };
 		29187C441E8B228300134598 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29187C431E8B228300134598 /* AppDelegate.swift */; };
 		29187C461E8B228300134598 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29187C451E8B228300134598 /* ViewController.swift */; };
 		29187C491E8B228300134598 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29187C471E8B228300134598 /* Main.storyboard */; };
 		29187C4C1E8B228300134598 /* No_Excuses.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 29187C4A1E8B228300134598 /* No_Excuses.xcdatamodeld */; };
 		29187C4E1E8B228300134598 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29187C4D1E8B228300134598 /* Assets.xcassets */; };
 		29187C511E8B228300134598 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29187C4F1E8B228300134598 /* LaunchScreen.storyboard */; };
+		29187C591E8B232400134598 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29187C581E8B232400134598 /* GoogleService-Info.plist */; };
+		E2B29ABC42085699BD61CE4B /* Pods_No_Excuses.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF1F4D2D7103BC9B6B5B99E0 /* Pods_No_Excuses.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		291738B41E8F2ABA00CDAC8F /* client_812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "client_812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com.plist"; sourceTree = "<group>"; };
+		291738B61E8F311900CDAC8F /* DailyCalendarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyCalendarVC.swift; sourceTree = "<group>"; };
 		29187C401E8B228300134598 /* No Excuses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "No Excuses.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29187C431E8B228300134598 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29187C451E8B228300134598 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +30,12 @@
 		29187C4D1E8B228300134598 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29187C501E8B228300134598 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		29187C521E8B228300134598 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29187C581E8B232400134598 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		29187C5A1E8B248A00134598 /* No Excuses-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "No Excuses-Bridging-Header.h"; sourceTree = "<group>"; };
+		292CE08A1E8ED9AB004E1B49 /* No Excuses.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "No Excuses.entitlements"; sourceTree = "<group>"; };
+		43DC8DA63E5BBA82FFFA0BAB /* Pods-No Excuses.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-No Excuses.debug.xcconfig"; path = "Pods/Target Support Files/Pods-No Excuses/Pods-No Excuses.debug.xcconfig"; sourceTree = "<group>"; };
+		54BC4E6A35B1269553E52F20 /* Pods-No Excuses.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-No Excuses.release.xcconfig"; path = "Pods/Target Support Files/Pods-No Excuses/Pods-No Excuses.release.xcconfig"; sourceTree = "<group>"; };
+		DF1F4D2D7103BC9B6B5B99E0 /* Pods_No_Excuses.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_No_Excuses.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2B29ABC42085699BD61CE4B /* Pods_No_Excuses.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +55,8 @@
 			children = (
 				29187C421E8B228300134598 /* No Excuses */,
 				29187C411E8B228300134598 /* Products */,
+				669417A91CB87D083D9DDA1F /* Pods */,
+				A8896EF5410B637205DFDD6C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +71,37 @@
 		29187C421E8B228300134598 /* No Excuses */ = {
 			isa = PBXGroup;
 			children = (
+				292CE08A1E8ED9AB004E1B49 /* No Excuses.entitlements */,
 				29187C431E8B228300134598 /* AppDelegate.swift */,
 				29187C451E8B228300134598 /* ViewController.swift */,
+				29187C581E8B232400134598 /* GoogleService-Info.plist */,
+				291738B41E8F2ABA00CDAC8F /* client_812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com.plist */,
 				29187C471E8B228300134598 /* Main.storyboard */,
 				29187C4D1E8B228300134598 /* Assets.xcassets */,
 				29187C4F1E8B228300134598 /* LaunchScreen.storyboard */,
 				29187C521E8B228300134598 /* Info.plist */,
 				29187C4A1E8B228300134598 /* No_Excuses.xcdatamodeld */,
+				29187C5A1E8B248A00134598 /* No Excuses-Bridging-Header.h */,
+				291738B61E8F311900CDAC8F /* DailyCalendarVC.swift */,
 			);
 			path = "No Excuses";
+			sourceTree = "<group>";
+		};
+		669417A91CB87D083D9DDA1F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				43DC8DA63E5BBA82FFFA0BAB /* Pods-No Excuses.debug.xcconfig */,
+				54BC4E6A35B1269553E52F20 /* Pods-No Excuses.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A8896EF5410B637205DFDD6C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DF1F4D2D7103BC9B6B5B99E0 /* Pods_No_Excuses.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +111,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 29187C551E8B228300134598 /* Build configuration list for PBXNativeTarget "No Excuses" */;
 			buildPhases = (
+				21002807581F15F47E7267BC /* [CP] Check Pods Manifest.lock */,
 				29187C3C1E8B228300134598 /* Sources */,
 				29187C3D1E8B228300134598 /* Frameworks */,
 				29187C3E1E8B228300134598 /* Resources */,
+				901B6C3DAD015526532ED71D /* [CP] Embed Pods Frameworks */,
+				3709869FC1EF675EBD101A2D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -99,7 +139,14 @@
 				TargetAttributes = {
 					29187C3F1E8B228300134598 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 874J72QHY8;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -127,12 +174,62 @@
 			buildActionMask = 2147483647;
 			files = (
 				29187C511E8B228300134598 /* LaunchScreen.storyboard in Resources */,
+				29187C591E8B232400134598 /* GoogleService-Info.plist in Resources */,
 				29187C4E1E8B228300134598 /* Assets.xcassets in Resources */,
+				291738B51E8F2ABA00CDAC8F /* client_812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com.plist in Resources */,
 				29187C491E8B228300134598 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		21002807581F15F47E7267BC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3709869FC1EF675EBD101A2D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-No Excuses/Pods-No Excuses-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		901B6C3DAD015526532ED71D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-No Excuses/Pods-No Excuses-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		29187C3C1E8B228300134598 /* Sources */ = {
@@ -141,6 +238,7 @@
 			files = (
 				29187C461E8B228300134598 /* ViewController.swift in Sources */,
 				29187C441E8B228300134598 /* AppDelegate.swift in Sources */,
+				291738B71E8F311900CDAC8F /* DailyCalendarVC.swift in Sources */,
 				29187C4C1E8B228300134598 /* No_Excuses.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,24 +360,35 @@
 		};
 		29187C561E8B228300134598 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 43DC8DA63E5BBA82FFFA0BAB /* Pods-No Excuses.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "No Excuses/No Excuses.entitlements";
+				DEVELOPMENT_TEAM = 874J72QHY8;
 				INFOPLIST_FILE = "No Excuses/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tonyshum.No-Excuses";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "No Excuses/No Excuses-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		29187C571E8B228300134598 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54BC4E6A35B1269553E52F20 /* Pods-No Excuses.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "No Excuses/No Excuses.entitlements";
+				DEVELOPMENT_TEAM = 874J72QHY8;
 				INFOPLIST_FILE = "No Excuses/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tonyshum.No-Excuses";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "No Excuses/No Excuses-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -303,6 +412,7 @@
 				29187C571E8B228300134598 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

@@ -10,16 +10,47 @@ import UIKit
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     var window: UIWindow?
-
-
+    var signInCallback: (()->())?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+//        var configurationError: NSError?
+//        GGLContext.sharedInstance().configureWithError(&configurationError)
+//        if(configurationError != nil) {
+//            print("We have an error! \(configurationError)")
+//        }
+        let kGTLAuthScopeGCalReadWrite = "https://www.googleapis.com/auth/calendar"
+        let kGTLAuthScopeGCalReadOnly = "https://www.googleapis.com/auth/calendar.readonly"
+        
+        GIDSignIn.sharedInstance().clientID = "812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com"
+        GIDSignIn.sharedInstance().scopes.append(kGTLAuthScopeGCalReadWrite)
+        GIDSignIn.sharedInstance().scopes.append(kGTLAuthScopeGCalReadOnly)
+        GIDSignIn.sharedInstance().delegate = self
         return true
     }
 
+    func application(_ application: UIApplication,
+                     open url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
+        return GIDSignIn.sharedInstance().handle(url,
+                                                    sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                                    annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if (error == nil) {
+            print("Wow! Our user signed in! \(user!)")
+            let currentUser = GIDSignIn.sharedInstance().currentUser
+            print(currentUser?.profile.name ?? "No Name")
+            print(currentUser?.profile.email ?? "No Email")
+        } else {
+            print("Looks like we got an sign-in error: \(error)")
+        }
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

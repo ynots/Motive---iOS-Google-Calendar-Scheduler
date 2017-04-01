@@ -1,0 +1,6 @@
+framework module Pods_No_Excuses {
+  umbrella header "Pods-No Excuses-umbrella.h"
+
+  export *
+  module * { export * }
+}
