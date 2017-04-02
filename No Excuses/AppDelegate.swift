@@ -6,27 +6,28 @@
 //  Copyright © 2017 Tony Shum. All rights reserved.
 //
 
+import GoogleAPIClient
 import UIKit
 import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
+    private let kKeychainItemName = "No Excuses"
+    private let kClientID = "812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com"
+    
+    private let kGTLAuthScopeGCalReadWrite = "https://www.googleapis.com/auth/calendar"
+    private let kGTLAuthScopeGCalReadOnly = "https://www.googleapis.com/auth/calendar.readonly"
+    
+    private let service = GTLServiceCalendar()
+    
     var window: UIWindow?
     var signInCallback: (()->())?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-//        var configurationError: NSError?
-//        GGLContext.sharedInstance().configureWithError(&configurationError)
-//        if(configurationError != nil) {
-//            print("We have an error! \(configurationError)")
-//        }
-        let kGTLAuthScopeGCalReadWrite = "https://www.googleapis.com/auth/calendar"
-        let kGTLAuthScopeGCalReadOnly = "https://www.googleapis.com/auth/calendar.readonly"
-        
-        GIDSignIn.sharedInstance().clientID = "812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com"
+        GIDSignIn.sharedInstance().clientID = kClientID
         GIDSignIn.sharedInstance().scopes.append(kGTLAuthScopeGCalReadWrite)
         GIDSignIn.sharedInstance().scopes.append(kGTLAuthScopeGCalReadOnly)
         GIDSignIn.sharedInstance().delegate = self

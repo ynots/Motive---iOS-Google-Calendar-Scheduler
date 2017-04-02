@@ -74,6 +74,7 @@
 				292CE08A1E8ED9AB004E1B49 /* No Excuses.entitlements */,
 				29187C431E8B228300134598 /* AppDelegate.swift */,
 				29187C451E8B228300134598 /* ViewController.swift */,
+				291738B61E8F311900CDAC8F /* DailyCalendarVC.swift */,
 				29187C581E8B232400134598 /* GoogleService-Info.plist */,
 				291738B41E8F2ABA00CDAC8F /* client_812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com.plist */,
 				29187C471E8B228300134598 /* Main.storyboard */,
@@ -82,7 +83,6 @@
 				29187C521E8B228300134598 /* Info.plist */,
 				29187C4A1E8B228300134598 /* No_Excuses.xcdatamodeld */,
 				29187C5A1E8B248A00134598 /* No Excuses-Bridging-Header.h */,
-				291738B61E8F311900CDAC8F /* DailyCalendarVC.swift */,
 			);
 			path = "No Excuses";
 			sourceTree = "<group>";

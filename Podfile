@@ -8,5 +8,6 @@ target 'No Excuses' do
   # Pods for No Excuses
   pod 'GoogleSignIn'
   pod 'Google'
+  pod 'GoogleAPIClient/Calendar'
 end
 
