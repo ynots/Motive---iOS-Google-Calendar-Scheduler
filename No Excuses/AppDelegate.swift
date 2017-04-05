@@ -22,11 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     private let service = GTLServiceCalendar()
     
     var window: UIWindow?
-    var signInCallback: (()->())?
-    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         
+        // Override point for customization after application launch.
         GIDSignIn.sharedInstance().clientID = kClientID
         GIDSignIn.sharedInstance().scopes.append(kGTLAuthScopeGCalReadWrite)
         GIDSignIn.sharedInstance().scopes.append(kGTLAuthScopeGCalReadOnly)
@@ -44,9 +43,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if (error == nil) {
             print("Wow! Our user signed in! \(user!)")
-            let currentUser = GIDSignIn.sharedInstance().currentUser
-            print(currentUser?.profile.name ?? "No Name")
-            print(currentUser?.profile.email ?? "No Email")
+            if let currentUser = GIDSignIn.sharedInstance().currentUser {
+                UserDefaults.standard.setValue(currentUser.profile.givenName!, forKey: "givenName")
+                UserDefaults.standard.setValue(currentUser.profile.familyName!, forKey: "familyName")
+                
+                let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
+                let uiVC = mainStoryBoard.instantiateViewController(withIdentifier: "userInterfaceView") as! UserInterfaceVC
+                
+                UIView.transition(from: (self.window?.rootViewController!.view)!, to: uiVC.view, duration: 0.6, options: [.transitionCrossDissolve], completion: {
+                    _ in
+                    self.window?.rootViewController = uiVC
+                })
+            }
         } else {
             print("Looks like we got an sign-in error: \(error)")
         }

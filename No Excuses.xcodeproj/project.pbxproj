@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		290CA0BD1E91B3360095E808 /* SetupIntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290CA0BC1E91B3360095E808 /* SetupIntroVC.swift */; };
+		290CA0BF1E91B5A00095E808 /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290CA0BE1E91B5A00095E808 /* WelcomeVC.swift */; };
+		290CA0C11E91BC240095E808 /* SetupScheduleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290CA0C01E91BC240095E808 /* SetupScheduleVC.swift */; };
+		290CA0C31E91BC3E0095E808 /* SetupTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290CA0C21E91BC3E0095E808 /* SetupTimeVC.swift */; };
+		290CA0C51E91BC570095E808 /* SetupRepetitionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290CA0C41E91BC570095E808 /* SetupRepetitionVC.swift */; };
+		290CA0C81E91BEDD0095E808 /* UserInterfaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290CA0C71E91BEDD0095E808 /* UserInterfaceVC.swift */; };
+		290CA0CB1E9211200095E808 /* Google-G.png in Resources */ = {isa = PBXBuildFile; fileRef = 290CA0CA1E9211200095E808 /* Google-G.png */; };
+		290CA0F61E9464270095E808 /* UISettingsDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290CA0F51E9464270095E808 /* UISettingsDisplayView.swift */; };
 		291738B51E8F2ABA00CDAC8F /* client_812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com.plist in Resources */ = {isa = PBXBuildFile; fileRef = 291738B41E8F2ABA00CDAC8F /* client_812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com.plist */; };
 		291738B71E8F311900CDAC8F /* DailyCalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291738B61E8F311900CDAC8F /* DailyCalendarVC.swift */; };
 		29187C441E8B228300134598 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29187C431E8B228300134598 /* AppDelegate.swift */; };
@@ -20,6 +28,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		290CA0BC1E91B3360095E808 /* SetupIntroVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupIntroVC.swift; sourceTree = "<group>"; };
+		290CA0BE1E91B5A00095E808 /* WelcomeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
+		290CA0C01E91BC240095E808 /* SetupScheduleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupScheduleVC.swift; sourceTree = "<group>"; };
+		290CA0C21E91BC3E0095E808 /* SetupTimeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupTimeVC.swift; sourceTree = "<group>"; };
+		290CA0C41E91BC570095E808 /* SetupRepetitionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetupRepetitionVC.swift; sourceTree = "<group>"; };
+		290CA0C71E91BEDD0095E808 /* UserInterfaceVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInterfaceVC.swift; sourceTree = "<group>"; };
+		290CA0CA1E9211200095E808 /* Google-G.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Google-G.png"; sourceTree = "<group>"; };
+		290CA0F51E9464270095E808 /* UISettingsDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISettingsDisplayView.swift; sourceTree = "<group>"; };
 		291738B41E8F2ABA00CDAC8F /* client_812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "client_812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com.plist"; sourceTree = "<group>"; };
 		291738B61E8F311900CDAC8F /* DailyCalendarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyCalendarVC.swift; sourceTree = "<group>"; };
 		29187C401E8B228300134598 /* No Excuses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "No Excuses.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +66,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		290CA0BA1E91B24A0095E808 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				29187C451E8B228300134598 /* ViewController.swift */,
+				291738B61E8F311900CDAC8F /* DailyCalendarVC.swift */,
+				290CA0BE1E91B5A00095E808 /* WelcomeVC.swift */,
+				290CA0BC1E91B3360095E808 /* SetupIntroVC.swift */,
+				290CA0C01E91BC240095E808 /* SetupScheduleVC.swift */,
+				290CA0C21E91BC3E0095E808 /* SetupTimeVC.swift */,
+				290CA0C41E91BC570095E808 /* SetupRepetitionVC.swift */,
+				290CA0C71E91BEDD0095E808 /* UserInterfaceVC.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		290CA0BB1E91B2660095E808 /* GSigin */ = {
+			isa = PBXGroup;
+			children = (
+				29187C581E8B232400134598 /* GoogleService-Info.plist */,
+				291738B41E8F2ABA00CDAC8F /* client_812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com.plist */,
+			);
+			name = GSigin;
+			sourceTree = "<group>";
+		};
+		290CA0C91E920E5E0095E808 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				290CA0CA1E9211200095E808 /* Google-G.png */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		290CA0F41E94640E0095E808 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				290CA0F51E9464270095E808 /* UISettingsDisplayView.swift */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
 		29187C371E8B228300134598 = {
 			isa = PBXGroup;
 			children = (
@@ -71,12 +127,12 @@
 		29187C421E8B228300134598 /* No Excuses */ = {
 			isa = PBXGroup;
 			children = (
+				290CA0F41E94640E0095E808 /* Classes */,
+				290CA0C91E920E5E0095E808 /* Assets */,
+				290CA0BB1E91B2660095E808 /* GSigin */,
+				290CA0BA1E91B24A0095E808 /* Controllers */,
 				292CE08A1E8ED9AB004E1B49 /* No Excuses.entitlements */,
 				29187C431E8B228300134598 /* AppDelegate.swift */,
-				29187C451E8B228300134598 /* ViewController.swift */,
-				291738B61E8F311900CDAC8F /* DailyCalendarVC.swift */,
-				29187C581E8B232400134598 /* GoogleService-Info.plist */,
-				291738B41E8F2ABA00CDAC8F /* client_812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com.plist */,
 				29187C471E8B228300134598 /* Main.storyboard */,
 				29187C4D1E8B228300134598 /* Assets.xcassets */,
 				29187C4F1E8B228300134598 /* LaunchScreen.storyboard */,
@@ -175,6 +231,7 @@
 			files = (
 				29187C511E8B228300134598 /* LaunchScreen.storyboard in Resources */,
 				29187C591E8B232400134598 /* GoogleService-Info.plist in Resources */,
+				290CA0CB1E9211200095E808 /* Google-G.png in Resources */,
 				29187C4E1E8B228300134598 /* Assets.xcassets in Resources */,
 				291738B51E8F2ABA00CDAC8F /* client_812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com.plist in Resources */,
 				29187C491E8B228300134598 /* Main.storyboard in Resources */,
@@ -237,9 +294,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				29187C461E8B228300134598 /* ViewController.swift in Sources */,
+				290CA0C51E91BC570095E808 /* SetupRepetitionVC.swift in Sources */,
+				290CA0C11E91BC240095E808 /* SetupScheduleVC.swift in Sources */,
+				290CA0F61E9464270095E808 /* UISettingsDisplayView.swift in Sources */,
+				290CA0C81E91BEDD0095E808 /* UserInterfaceVC.swift in Sources */,
 				29187C441E8B228300134598 /* AppDelegate.swift in Sources */,
 				291738B71E8F311900CDAC8F /* DailyCalendarVC.swift in Sources */,
+				290CA0BF1E91B5A00095E808 /* WelcomeVC.swift in Sources */,
+				290CA0C31E91BC3E0095E808 /* SetupTimeVC.swift in Sources */,
 				29187C4C1E8B228300134598 /* No_Excuses.xcdatamodeld in Sources */,
+				290CA0BD1E91B3360095E808 /* SetupIntroVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

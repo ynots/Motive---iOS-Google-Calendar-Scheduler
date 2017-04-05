@@ -42,7 +42,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        button.addTarget(self, action: #selector("signInButtonPressed"), for: .touchUpInside)
+        button.addTarget(self, action: #selector(signInButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -53,11 +53,27 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        button.addTarget(self, action: #selector("signButtonPressed"), for: .touchUpInside)
+        button.addTarget(self, action: #selector(signOutButtonPressed), for: .touchUpInside)
         return button
     }()
     
+    func signInButtonPressed (button: UIButton) {
+        GIDSignIn.sharedInstance().signIn()
+        if let currentUser = GIDSignIn.sharedInstance().currentUser {
+            print("\(currentUser.profile.name!) has signed in.")
+        } else {
+            print("no users")
+        }
+    }
     
+    func signOutButtonPressed (button: UIButton) {
+        GIDSignIn.sharedInstance().signOut()
+        if let currentUser = GIDSignIn.sharedInstance().currentUser {
+            print("\(currentUser.profile.name!) is still signed in.")
+        } else {
+            print("Signed Out")
+        }
+    }
     
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var refreshButton: UIButton!
@@ -94,10 +110,12 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
         super.viewDidLoad()
         
         view.addSubview(welcomeLabel)
-        view.addSubview(signOutButton)
         view.addSubview(profileImageView)
+        view.addSubview(signInButton)
+        view.addSubview(signOutButton)
         setUpWelcomeLabel()
         setUpProfilePic()
+        setUpSignInButton()
         setUpSignOutButton()
         
         // refreshInterface()
@@ -125,9 +143,16 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
         profileImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
+    func setUpSignInButton() {
+        signInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        signInButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        signInButton.widthAnchor.constraint(equalTo: signInButton.widthAnchor).isActive = true
+        signInButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
     func setUpSignOutButton() {
         signOutButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        signOutButton.bottomAnchor.constraint(equalTo: signInButton.topAnchor, constant: -12).isActive = true
+        signOutButton.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 12).isActive = true
         signOutButton.widthAnchor.constraint(equalTo: signInButton.widthAnchor).isActive = true
         signOutButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
