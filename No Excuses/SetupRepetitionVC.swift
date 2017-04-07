@@ -15,7 +15,9 @@ class SetupRepetitionVC: UIViewController {
         view.backgroundColor = UIColor(red: 0, green: 133/255, blue: 188/255, alpha: 1)
         
         view.addSubview(pageTitle)
+        view.addSubview(repetitionInput)
         view.addSubview(nextButton)
+        
         setupPageTitle()
         setupNextButton()
         
@@ -39,12 +41,20 @@ class SetupRepetitionVC: UIViewController {
         pageTitle.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
+    let repetitionInput: UITextField = {
+        let input = UITextField()
+        input.keyboardType = UIKeyboardType.numberPad
+        input.text = "4"
+        return input
+    }()
+    
     let nextButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Done >", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor.white, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 40)
+        button.titleLabel?.textAlignment = .right
         button.addTarget(self, action: #selector(nextButtonWasPressed), for: .touchUpInside)
         return button
     }()
@@ -52,12 +62,18 @@ class SetupRepetitionVC: UIViewController {
     func setupNextButton() {
         nextButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24).isActive = true
         nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150).isActive = true
-        nextButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        nextButton.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         nextButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     func nextButtonWasPressed (button: UIButton) {
+        saveSettings()
         performSegue(withIdentifier: "setupToUISegue", sender: nil)
+    }
+    
+    func saveSettings() {
+        let repetitions = Int((repetitionInput.text)!)
+        UserDefaults.standard.set(repetitions, forKey: "repetitions")
     }
     
     override func didReceiveMemoryWarning() {

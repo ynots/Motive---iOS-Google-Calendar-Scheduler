@@ -44,21 +44,21 @@ class SetupIntroVC: UIViewController, GIDSignInUIDelegate {
         let button = UIButton(type: .custom)
         button.backgroundColor = UIColor.white
         button.contentHorizontalAlignment = .left
-        button.setTitle("Sign In with Google", for: .normal)
+        button.setTitle("Log In with Google", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor(red: 102/255, green: 102/255, blue: 102/255, alpha: 1), for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 22)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.addTarget(self, action: #selector(signInButtonPressed), for: .touchUpInside)
         
         // Set image in button
         let btnImg = UIImage(named: "Google-G.png")
         button.setImage(btnImg, for: .normal)
         button.imageView?.contentMode = .scaleAspectFit
-        button.imageView?.widthAnchor.constraint(equalTo: button.widthAnchor, constant: -20)
+        button.imageView?.widthAnchor.constraint(equalTo: button.widthAnchor, constant: -30)
         
         // Set padding in button
-        button.imageEdgeInsets = UIEdgeInsets(top: 7, left: -70, bottom: 7, right: 7)
-        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -70, bottom: 0, right: 0)
+        button.imageEdgeInsets = UIEdgeInsets(top: 12, left: -70, bottom: 12, right: 12)
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: -95, bottom: 0, right: 0)
         return button
     }()
     

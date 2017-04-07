@@ -12,7 +12,7 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 29/255, green: 204/255, blue: 41/255, alpha: 1)
+        view.backgroundColor = UIColor(red: 127/255, green: 204/255, blue: 41/255, alpha: 1)
         view.addSubview(appTitleLbl)
         view.addSubview(continueButton)
         setupAppTitleLbl()
