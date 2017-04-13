@@ -13,8 +13,10 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 127/255, green: 204/255, blue: 41/255, alpha: 1)
+        view.addSubview(appHeadline)
         view.addSubview(appTitleLbl)
         view.addSubview(continueButton)
+        setupAppHeadline()
         setupAppTitleLbl()
         setupContinueButton()
         // Do any additional setup after loading the view.
@@ -22,6 +24,24 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate {
         // Check if user was signed in previously and sign in silently
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().signInSilently()
+    }
+    
+    let appHeadline: UILabel = {
+        let label = UILabel()
+        label.text = "We find the time in your schedule.\n We create your workout session. \n So you reach your potential."
+        label.textColor = UIColor.white
+        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.textAlignment = NSTextAlignment.center
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    func setupAppHeadline() {
+        appHeadline.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        appHeadline.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
+        appHeadline.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
+        appHeadline.heightAnchor.constraint(equalToConstant: 125).isActive = true
     }
     
     let appTitleLbl: UILabel = {
@@ -54,7 +74,7 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate {
     
     func setupContinueButton() {
         continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        continueButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -150).isActive = true
+        continueButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75).isActive = true
         continueButton.widthAnchor.constraint(equalTo: appTitleLbl.widthAnchor).isActive = true
         continueButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }

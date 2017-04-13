@@ -9,7 +9,7 @@
 import UIKit
 
 class UISettingsDisplayView: UIView {
-    private let rotation = CGAffineTransform(rotationAngle: CGFloat(-M_PI_2))
+    private let rotation = CGAffineTransform(rotationAngle: CGFloat(-Double.pi/2))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,6 +47,12 @@ class UISettingsDisplayView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    /****************************************
+     *
+     * View Setup
+     *
+     *****************************************/
     let numPerWeekLbl: UILabel = {
         let label = UILabel()
         label.text = "9"
@@ -77,6 +83,9 @@ class UISettingsDisplayView: UIView {
         numPerWeekTitleLbl.topAnchor.constraint(equalTo: numPerWeekLbl.topAnchor, constant: 30).isActive = true
     }
     
+    /*
+     * FromTime Row
+     */
     let fromTimeTitleLbl: UILabel = {
         let label = UILabel()
         label.text = "FROM"
@@ -151,9 +160,12 @@ class UISettingsDisplayView: UIView {
     func setupFromAPLbl() {
         fromAPLbl.transform = rotation
         fromAPLbl.rightAnchor.constraint(equalTo: numPerWeekTitleLbl.rightAnchor, constant: 12).isActive = true
-        fromAPLbl.topAnchor.constraint(equalTo: numPerWeekTitleLbl.bottomAnchor, constant: 9).isActive = true
+        fromAPLbl.topAnchor.constraint(equalTo: numPerWeekTitleLbl.bottomAnchor, constant: 12).isActive = true
     }
     
+    /*
+     * ToTime Row
+     */
     let toTimeTitleLbl: UILabel = {
         let label = UILabel()
         label.text = "UNTIL"
@@ -228,7 +240,7 @@ class UISettingsDisplayView: UIView {
     func setupToAPLbl() {
         toAPLbl.transform = rotation
         toAPLbl.rightAnchor.constraint(equalTo: numPerWeekTitleLbl.rightAnchor, constant: 12).isActive = true
-        toAPLbl.topAnchor.constraint(equalTo: fromTimeHourLbl.bottomAnchor, constant: 9).isActive = true
+        toAPLbl.topAnchor.constraint(equalTo: fromTimeHourLbl.bottomAnchor, constant: 12).isActive = true
     }
     
     /*

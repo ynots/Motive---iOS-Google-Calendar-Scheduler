@@ -28,7 +28,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
         let imageView = UIImageView()
         if let currentUser = GIDSignIn.sharedInstance().currentUser {
             let profilePicURL = currentUser.profile.imageURL(withDimension: 175)
-            imageView.image = UIImage(data: NSData(contentsOf: profilePicURL!) as! Data)
+            imageView.image = UIImage(data: NSData(contentsOf: profilePicURL!)! as Data)
         }
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
@@ -95,7 +95,7 @@ class ViewController: UIViewController, GIDSignInUIDelegate {
             self.signOutButton.isHidden = false
             self.welcomeLabel.text = "Welcome, \(currentUser.profile.name!)"
             let profilePicURL = currentUser.profile.imageURL(withDimension: 175)
-            self.profilePic.image = UIImage(data: NSData(contentsOf: profilePicURL!) as! Data)
+            self.profilePic.image = UIImage(data: NSData(contentsOf: profilePicURL!)! as Data)
             self.profilePic.isHidden = false
         } else {
             self.signInButton.isHidden = false

@@ -11,16 +11,22 @@ import GoogleAPIClient
 
 class UserInterfaceVC: UIViewController {
     private let service = GTLServiceCalendar()
-    private var listOfCalendars: Any?
-    private var listOfEvents: Any?
-    private var startTime: NSDate?
-    private var endTime: NSDate?
-    private var timesPerWeek: Int?
+    private let cal = Calendar.current
+    private var dF: DateFormatter?
+    private var weekStartDate: Date?
+    private var weekEndDate: Date?
+    private var fromTime: Date?
+    private var toTime: Date?
+    private var repetitions: Int?
+    private var sessionLengthHours: Int = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        timesPerWeek = UserDefaults.standard.value(forKey: "repetitions") as! Int?
+        if(self.dF == nil) {
+            self.dF = DateFormatter()
+            self.dF?.dateFormat = "MM/dd/yy, hh:mm a"
+        }
         
         // Scroll View
         view.addSubview(baseScrollView)
@@ -36,7 +42,18 @@ class UserInterfaceVC: UIViewController {
         
         // UI Settings Display Section
         baseScrollView.addSubview(uiSettingsDisplayView)
-        uiSettingsDisplayView.numPerWeekLbl.text = "\(timesPerWeek!)"
+        if let timesPerWeek: Int = UserDefaults.standard.value(forKey: "repetitions") as! Int? {
+            self.repetitions = timesPerWeek
+            uiSettingsDisplayView.numPerWeekLbl.text = "\(timesPerWeek)"
+        }
+        if let fromTime: Date = UserDefaults.standard.value(forKey: "fromTime") as! Date? {
+            self.fromTime = fromTime
+            setTime(key: "from", time: fromTime)
+        }
+        if let toTime: Date = UserDefaults.standard.value(forKey: "toTime") as! Date? {
+            self.toTime = toTime
+            setTime(key: "to", time: toTime)
+        }
         setupSettingsDisplayView()
         
         // Create Schedule Section
@@ -69,6 +86,11 @@ class UserInterfaceVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    /****************************************
+     *
+     * View Setup
+     *
+     *****************************************/
     let baseScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -352,25 +374,60 @@ class UserInterfaceVC: UIViewController {
     
     /****************************************
      *
+     * Setting Display Functions
+     *
+     *****************************************/
+    func setTime(key: String, time: Date) {
+        let minute = cal.component(.minute, from: time)
+        var hour = cal.component(.hour, from: time)
+        
+        var ampm: String
+        if(hour >= 12) {
+            ampm = "PM"
+        } else {
+            ampm = "AM"
+        }
+        hour %= 12
+        if hour == 0 { hour += 12 }
+        
+        if (key == "from") {
+            uiSettingsDisplayView.fromTimeHourLbl.text = "\(hour)"
+            uiSettingsDisplayView.fromTimeMinuteLbl.text = "\(minute)"
+            uiSettingsDisplayView.fromAPLbl.text = ampm
+        } else {
+            uiSettingsDisplayView.toTimeHourLbl.text = "\(hour)"
+            uiSettingsDisplayView.toTimeMinuteLbl.text = "\(minute)"
+            uiSettingsDisplayView.toAPLbl.text = ampm
+        }
+    }
+    
+    /****************************************
+     *
      * Google Calendar Functions
      *
      *****************************************/
+//    var weekStartDate: Date
+//    var weekEndDate: Date
     
     /*
      * Function: fetchEvents
      * Queries Google Cal for a list of events, directs to findFreeTimeSlots through selector
      */
     func fetchEvents () {
-        // Set Start date to last Sunday's 7:00 am
-        var weekStartDate: Date {
-            return NSCalendar.current.date(from: NSCalendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: Date()))!
-        }
-        // Set End date to the coming Sunday's 7:00 am
-        var weekEndDate: Date {
-            let dayComponent = NSDateComponents()
-            dayComponent.day = 7
-            return NSCalendar.current.date(byAdding: dayComponent as DateComponents, to: weekStartDate)!
-        }
+        let today = Date()
+        let lastSundayMorning = cal.date(from: cal.dateComponents([.yearForWeekOfYear, .weekOfYear], from: today))
+        
+        // One Week in DateComponents
+        let dayComponent = NSDateComponents()
+        dayComponent.day = 7
+        
+        // Week Start = the coming Sunday at midnight
+        self.weekStartDate = cal.date(byAdding: dayComponent as DateComponents, to: lastSundayMorning!)!
+        print(self.weekStartDate!)
+        
+        // Week End = the following Sunday at midnight
+        self.weekEndDate = cal.date(byAdding: dayComponent as DateComponents, to: weekStartDate!)!
+        print(self.weekEndDate!)
         
         // Build GCal query string
         let query = GTLQueryCalendar.queryForEventsList(withCalendarId: "primary")
@@ -382,7 +439,7 @@ class UserInterfaceVC: UIViewController {
             query!,
             delegate: self,
             // selector after finish query
-            didFinish: #selector(self.findFreeTimeSlots(ticket:finishedWithObject:error:))
+            didFinish: #selector(self.findConflictedDays(ticket:finishedWithObject:error:))
         )
     }
     
@@ -392,48 +449,143 @@ class UserInterfaceVC: UIViewController {
      * sort events in each day of week, check for free time
      * If free time: instantiate array & append to array, else nil
      */
-    func findFreeTimeSlots(
+    func findConflictedDays(
         ticket: GTLServiceTicket,
         finishedWithObject response : GTLCalendarEvents,
-        error : NSError?) {
-            // Check Error
-            if let error = error {
-                // showAlert("Error", message: error.localizedDescription)
-                print(error.localizedDescription)
-                return
-            }
-            
-            var eventString = ""
-            let events = response.items()
-            if (!(events?.isEmpty)!) {
-                for event in events as! [GTLCalendarEvent] {
+        error : NSError?)
+    {
+        // Check Error
+        if let error = error {
+            // showAlert("Error", message: error.localizedDescription)
+            print(error.localizedDescription)
+            return
+        }
+        // Set events from response
+        let events = response.items()
+        
+        // Initialize array of conflicted days
+        var conflictedDays: [Int] = []
+        
+        // if events is not empty, check if event conflicts with alloted time
+        if (!(events?.isEmpty)!) {
+            for event in events as! [GTLCalendarEvent] {
+                // if event conflicts with alloted time, append to conflictedDays array
+                if(hasEventConflict(event: event)) {
                     let start : GTLDateTime! = event.start.dateTime ?? event.start.date
-                    let startString = DateFormatter.localizedString(
-                        from: start.date,
-                        dateStyle: .short,
-                        timeStyle: .short
-                    )
-                    let end : GTLDateTime! = event.end.dateTime ?? event.end.date
-                    let endString = DateFormatter.localizedString(
-                        from: end.date,
-                        dateStyle: .short,
-                        timeStyle: .short
-                    )
-                    eventString += "\(startString) - \(endString) \(event.summary!)\n"
+                    let day = cal.component(.day, from: start.date)
+                    // if conflictedDays array does not contain event.day, append to conflictedDays
+                    if !conflictedDays.contains(day) {
+                        conflictedDays.append(day)
+                    }
                 }
-            } else {
-                eventString = "No upcoming events found."
             }
-        print(eventString)
-        // for each day of week, check if timeRange have a 2-hr free block
-        // if free, push day to arrayFreeTimeSlots
-        // return arrayFreeTimeSlots
+        } else {
+            print("No events found.")
+        }
+        // Pass conflictedDays to scheduleSessions
+        scheduleSessions(conflicts: conflictedDays)
     }
     
-    func scheduleSessions() {
-        // if (arrayFreeTimeSlots <= self.numPerWeek) {
-        // foreach freeTimeSlot add event
-        // else { 
+    /*
+     * Function: hasEventConflict
+     * Parameter: GTLCalendarEvent
+     * takes start and end time for event, compares with alloted time range, return true if conflict found
+     */
+    func hasEventConflict(event: GTLCalendarEvent)-> (Bool) {
+        let end: GTLDateTime! = event.end.dateTime ?? event.end.date
+        let endHour = cal.component(.hour, from: end.date)
+        
+        let start : GTLDateTime! = event.start.dateTime ?? event.start.date
+        let startHour = cal.component(.hour, from: start.date)
+        let eventRange = startHour...endHour
+        
+        let fromTimeHour = cal.component(.hour, from: self.fromTime!)
+        let toTimeHour = cal.component(.hour, from:self.toTime!)
+        let allotedRange = fromTimeHour...toTimeHour
+        /* 
+         * If event ended before alloted Time
+         * OR event starts after alloted Time
+         * return false (no conflict)
+         */
+        if (endHour < fromTimeHour
+            || startHour > toTimeHour) {
+            print("Event out of range")
+            return false
+        }
+        
+        // If startHour or endHour is inside the alloted time range, return true
+        if (allotedRange.contains(startHour) || allotedRange.contains(endHour)) {
+            print("Event in alloted time")
+            return true
+        }
+        // Else if evenRange contains fromTime or toTime, return true
+        else if (eventRange.contains(fromTimeHour) || eventRange.contains(toTimeHour)) {
+            print("Event surrounds alloted time")
+            return true
+        }
+        return true
+    }
+    
+    /*
+     * Function: scheduleSessions
+     * Parameter: conflicts [Int]
+     * takes a list of days with conflicts, schedule sessions on days other than conflicted days
+     */
+    func scheduleSessions(conflicts: [Int]) {
+        var availableDays: [Date] = []
+        let weekLength = 7
+        let weekStart = self.weekStartDate!
+        
+        // Find available days
+        for dayNum in 0 ..< weekLength {
+            let date = cal.date(byAdding: .day, value: dayNum, to: weekStart)!
+            let day = cal.component(.day, from: date)
+            
+            if !conflicts.contains(day) {
+                availableDays.append(date)
+            }
+        }
+        
+        // If there are available days
+        if availableDays.count > 0 {
+            let timezone = NSTimeZone.system
+        
+            let fromHour = cal.component(.hour, from: self.fromTime!)
+            let fromMinute = cal.component(.minute, from: self.fromTime!)
+            let toHour = cal.component(.hour, from: self.toTime!)
+            let toMinute = cal.component(.minute, from: self.toTime!)
+            
+            var events: [GTLCalendarEvent] = []
+            
+            // if (arrayFreeTimeSlots <= self.repetitions) {
+            // foreach freeTimeSlot add event
+            if (availableDays.count <= self.repetitions!) {
+                for day in availableDays {
+                    let event = GTLCalendarEvent.init()
+                    event.summary = "Time to Work It, Big Guy!"
+                    event.reminders = GTLCalendarEventReminders.init()
+                    event.reminders.useDefault = true
+                    var time = day.setTime(hour: fromHour, minute: fromMinute)
+                    event.start = GTLCalendarEventDateTime.init()
+                    event.start.dateTime = GTLDateTime.init(date: time, timeZone: timezone)
+                    time = day.setTime(hour: toHour, minute: toMinute)
+                    event.end = GTLCalendarEventDateTime.init()
+                    event.end.dateTime = GTLDateTime.init(date: time, timeZone: timezone)
+                    events.append(event)
+                }
+            }
+            
+            if events.count > 0 {
+                let calendarId: String = "primary"
+                for event in events {
+                    let query = GTLQueryCalendar.queryForEventsInsert(withObject: event, calendarId: calendarId)
+                    self.service.executeQuery(query!, delegate: self, didFinish: nil)
+                }
+            }
+        }
+        
+        
+        // else {
         // check for consecutiveDays in array
         // avoid consecutive days
         // schedule free time slots
@@ -454,14 +606,36 @@ class UserInterfaceVC: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
 }
-//
-//extension UIView {
-//    func addBottomBorderWithColor(color: UIColor, width: CGFloat) {
-//        let border = CALayer()
-//        border.backgroundColor = color.cgColor
-//        border.frame = CGRect(x: 0, y: self.frame.size.height - width, width: frame.size.width, height: width)
-//        self.layer.addSublayer(border)
-//    }
-//}
+
+extension Date {
+    func setTime(hour: Int, minute: Int) -> Date {
+        let calendar = Calendar(identifier: .gregorian)
+        var components = calendar.dateComponents([.day, .month, .year], from: self)
+        components.hour = hour
+        components.minute = minute
+        return calendar.date(from: components)!
+    }
+}
+extension Formatter {
+    static let iso8601: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+        return formatter
+    }()
+}
+extension Date {
+    var iso8601: String {
+        return Formatter.iso8601.string(from: self)
+    }
+}
+
+extension String {
+    var dateFromISO8601: Date? {
+        return Formatter.iso8601.date(from: self)   // "Mar 22, 2017, 10:22 AM"
+    }
+}
