@@ -134,7 +134,7 @@ class UserInterfaceVC: UIViewController {
             label.text = "Hi, \(currentUser.profile.givenName!) !"
         }
         label.textColor = UIColor.white
-        label.font = UIFont.boldSystemFont(ofSize: 34)
+        label.font = UIFont.boldSystemFont(ofSize: 50)
         label.textAlignment = NSTextAlignment.left
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -224,10 +224,10 @@ class UserInterfaceVC: UIViewController {
     
     let createButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = .white
-        button.setTitle("Create Schedule", for: .normal)
+        button.backgroundColor = UIColor(red: 0, green: 0.4588, blue: 0.8078, alpha: 1.0)
+        button.setTitle("Schedule Me!", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitleColor(UIColor(red: 102/255, green: 102/255, blue: 102/255, alpha: 1), for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
         button.addTarget(self, action: #selector(createButtonPressed), for: .touchUpInside)
         return button
@@ -286,7 +286,7 @@ class UserInterfaceVC: UIViewController {
     let settingsButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .white
-        button.setTitle("Edit Settings", for: .normal)
+        button.setTitle("Change Preferences", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(UIColor(red: 102/255, green: 102/255, blue: 102/255, alpha: 1), for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
@@ -346,23 +346,34 @@ class UserInterfaceVC: UIViewController {
 
     let signOutButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = UIColor.white
+        button.backgroundColor = UIColor(red: 1, green: 0.4588, blue: 0.4588, alpha: 1.0)
         button.setTitle("Sign Out", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitleColor(UIColor(red: 102/255, green: 102/255, blue: 102/255, alpha: 1), for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
         button.addTarget(self, action: #selector(signOutButtonPressed), for: .touchUpInside)
         return button
     }()
     
     func signOutButtonPressed (button: UIButton) {
-        GIDSignIn.sharedInstance().signOut()
-        if let currentUser = GIDSignIn.sharedInstance().currentUser {
-            print("\(currentUser.profile.name!) is still signed in.")
-        } else {
-            print("Signed Out")
-            performSegue(withIdentifier: "logoutToSetupIntro", sender: nil)
-        }
+        
+        let alert = UIAlertController(title: "Sign Out", message: "Are you sure you want to sign out from Google?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Sign Out", style: .destructive){
+            action in
+            GIDSignIn.sharedInstance().signOut()
+            if let currentUser = GIDSignIn.sharedInstance().currentUser {
+                print("\(currentUser.profile.name!) is still signed in.")
+            } else {
+                print("Signed Out")
+                self.performSegue(withIdentifier: "logoutToWelcome", sender: nil)
+            }
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default) {
+            action in
+            print("Sign out cancelled")
+        })
+        self.present(alert, animated: true)
+        
     }
     
     func setUpSignOutButton() {
@@ -511,9 +522,20 @@ class UserInterfaceVC: UIViewController {
             || startHour > toTimeHour) {
             print("Event out of range")
             return false
+        } else if (endHour == fromTimeHour || startHour == toTimeHour) {
+            let endMin = cal.component(.minute, from: end.date)
+            let startMin = cal.component(.minute, from: start.date)
+            let fromMin = cal.component(.minute, from: self.fromTime!)
+            let toMin = cal.component(.minute, from: self.toTime!)
+            
+            if ((endHour == fromTimeHour && endMin < fromMin)
+                || (startHour == toTimeHour && startMin > toMin)){
+                print("Event out of range")
+                return false
+            }
         }
         
-        // If startHour or endHour is inside the alloted time range, return true
+        // If startHour or endHour is inside the alloted time range,
         if (allotedRange.contains(startHour) || allotedRange.contains(endHour)) {
             print("Event in alloted time")
             return true
@@ -523,7 +545,7 @@ class UserInterfaceVC: UIViewController {
             print("Event surrounds alloted time")
             return true
         }
-        return true
+        return false
     }
     
     /*
@@ -548,30 +570,27 @@ class UserInterfaceVC: UIViewController {
         
         // If there are available days
         if availableDays.count > 0 {
-            let timezone = NSTimeZone.system
-        
+            
             let fromHour = cal.component(.hour, from: self.fromTime!)
             let fromMinute = cal.component(.minute, from: self.fromTime!)
             let toHour = cal.component(.hour, from: self.toTime!)
             let toMinute = cal.component(.minute, from: self.toTime!)
             
             var events: [GTLCalendarEvent] = []
-            
             // if (arrayFreeTimeSlots <= self.repetitions) {
             // foreach freeTimeSlot add event
             if (availableDays.count <= self.repetitions!) {
                 for day in availableDays {
-                    let event = GTLCalendarEvent.init()
-                    event.summary = "Time to Work It, Big Guy!"
-                    event.reminders = GTLCalendarEventReminders.init()
-                    event.reminders.useDefault = true
-                    var time = day.setTime(hour: fromHour, minute: fromMinute)
-                    event.start = GTLCalendarEventDateTime.init()
-                    event.start.dateTime = GTLDateTime.init(date: time, timeZone: timezone)
-                    time = day.setTime(hour: toHour, minute: toMinute)
-                    event.end = GTLCalendarEventDateTime.init()
-                    event.end.dateTime = GTLDateTime.init(date: time, timeZone: timezone)
+                    let event = createEvent(day: day, fromHour: fromHour, fromMinute: fromMinute, toHour: toHour, toMinute: toMinute)
                     events.append(event)
+                }
+            } else {
+                var reps: Int = 0
+                while reps < self.repetitions! {
+                    let day = availableDays[reps]
+                    let event = createEvent(day: day, fromHour: fromHour, fromMinute: fromMinute, toHour: toHour, toMinute: toMinute)
+                    events.append(event)
+                    reps += 1
                 }
             }
             
@@ -581,14 +600,48 @@ class UserInterfaceVC: UIViewController {
                     let query = GTLQueryCalendar.queryForEventsInsert(withObject: event, calendarId: calendarId)
                     self.service.executeQuery(query!, delegate: self, didFinish: nil)
                 }
+                let alert = UIAlertController(title: "Scheduled!", message: "\(events.count) sessions are scheduled! Would you like me to show you your Google Calendar?", preferredStyle: .alert)
+//                alert.addAction(UIAlertAction(title: "Yeah!", style: .default ){
+//                    action in
+//                    let options = [UIApplicationOpenURLOptionUniversalLinksOnly : true]
+//                    UIApplication.shared.open(URL(string: "comgooglecalendar")!, options: options, completionHandler: nil)
+//                })
+                alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel) {
+                    action in
+                    print("Schedule created")
+                })
+                self.present(alert, animated: true)
+            } else {
+                print("Unexpected error: Events were empty.")
             }
+        } else {
+            let alert = UIAlertController(title: "Oops!", message: "I couldn't find a free date. Maybe give me another time range to work with!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .default) {
+                action in
+                print("No available time")
+            })
+            self.present(alert, animated: true)
         }
+    }
+    
+    /*
+     * Function: createEvent
+     * Parameters: day (Date), fromHour, fromMinute, toHour, toMinute (Ints)
+     * Takes day and time, create an new GTLCalendarEvent, return GTLCalendarEvent
+     */
+    func createEvent (day: Date, fromHour: Int, fromMinute: Int, toHour: Int, toMinute: Int) -> GTLCalendarEvent {
         
-        
-        // else {
-        // check for consecutiveDays in array
-        // avoid consecutive days
-        // schedule free time slots
+        let event = GTLCalendarEvent.init()
+        event.summary = "Time to Work It, Big Guy!"
+        event.reminders = GTLCalendarEventReminders.init()
+        event.reminders.useDefault = true
+        var time = day.setTime(hour: fromHour, minute: fromMinute)
+        event.start = GTLCalendarEventDateTime.init()
+        event.start.dateTime = GTLDateTime.init(date: time, timeZone: NSTimeZone.system)
+        time = day.setTime(hour: toHour, minute: toMinute)
+        event.end = GTLCalendarEventDateTime.init()
+        event.end.dateTime = GTLDateTime.init(date: time, timeZone: NSTimeZone.system)
+        return event
     }
 
     override func didReceiveMemoryWarning() {
@@ -616,26 +669,5 @@ extension Date {
         components.hour = hour
         components.minute = minute
         return calendar.date(from: components)!
-    }
-}
-extension Formatter {
-    static let iso8601: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar(identifier: .iso8601)
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
-        return formatter
-    }()
-}
-extension Date {
-    var iso8601: String {
-        return Formatter.iso8601.string(from: self)
-    }
-}
-
-extension String {
-    var dateFromISO8601: Date? {
-        return Formatter.iso8601.date(from: self)   // "Mar 22, 2017, 10:22 AM"
     }
 }

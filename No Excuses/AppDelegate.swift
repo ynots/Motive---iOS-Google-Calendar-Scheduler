@@ -9,9 +9,10 @@
 import GoogleAPIClient
 import UIKit
 import CoreData
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate, UNUserNotificationCenterDelegate {
 
     private let kKeychainItemName = "No Excuses"
     private let kClientID = "812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com"
@@ -22,17 +23,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     private let service = GTLServiceCalendar()
     
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         // Override point for customization after application launch.
+        
+        // Set up GoogleSignIn
         GIDSignIn.sharedInstance().clientID = kClientID
         GIDSignIn.sharedInstance().scopes.append(kGTLAuthScopeGCalReadWrite)
         GIDSignIn.sharedInstance().scopes.append(kGTLAuthScopeGCalReadOnly)
         GIDSignIn.sharedInstance().delegate = self
+        
+        // Set up Remote notifications
+//        registerForRemoteNotification()
         return true
     }
 
+    /*
+     * Google SignIn Functions
+     */
     func application(_ application: UIApplication,
                      open url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
         return GIDSignIn.sharedInstance().handle(url,
@@ -48,11 +57,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
                 UserDefaults.standard.setValue(currentUser.profile.familyName!, forKey: "familyName")
                 
                 let mainStoryBoard = UIStoryboard(name: "Main", bundle: nil)
-                let uiVC = mainStoryBoard.instantiateViewController(withIdentifier: "userInterfaceView") as! UserInterfaceVC
                 
-                UIView.transition(from: (self.window?.rootViewController!.view)!, to: uiVC.view, duration: 0.6, options: [.transitionCrossDissolve], completion: {
+                var vc: UIViewController
+                if (UserDefaults.standard.value(forKey: "fromTime") == nil
+                    || UserDefaults.standard.value(forKey: "toTime") == nil
+                    || UserDefaults.standard.value(forKey: "repetitions") == nil ) {
+                    vc =  mainStoryBoard.instantiateViewController(withIdentifier: "setupTimeView") as! SetupTimeVC
+                } else {
+                    vc =  mainStoryBoard.instantiateViewController(withIdentifier: "userInterfaceView") as! UserInterfaceVC
+                }
+                UIView.transition(from: (self.window?.rootViewController!.view)!, to: vc.view, duration: 0.6, options: [.transitionCrossDissolve], completion: {
                     _ in
-                    self.window?.rootViewController = uiVC
+                    self.window?.rootViewController = vc
                 })
             }
         } else {
@@ -60,6 +76,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         }
     }
     
+    /*
+     * Push Notification Handler
+     */
+//    func registerForRemoteNotification() {
+//        if #available(iOS 10.0, *) {
+//            let center  = UNUserNotificationCenter.current()
+//            center.delegate = self
+//            center.requestAuthorization(options: [.sound, .alert, .badge]) { (granted, error) in
+//                if error == nil{
+//                    UIApplication.shared.registerForRemoteNotifications()
+//                }
+//            }
+//        }
+//        else {
+//            UIApplication.shared.registerUserNotificationSettings(UIUserNotificationSettings(types: [.sound, .alert, .badge], categories: nil))
+//            UIApplication.shared.registerForRemoteNotifications()
+//        }
+//    }
+//    
+//    //Called when a notification is delivered to a foreground app.
+//    @available(iOS 10.0, *)
+//    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+//        print("User Info = ",notification.request.content.userInfo)
+//        completionHandler([.alert, .badge, .sound])
+//    }
+//    
+//    //Called to let your app know which action was selected by the user for a given notification.
+//    @available(iOS 10.0, *)
+//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+//        print("User Info = ",response.notification.request.content.userInfo)
+//        completionHandler()
+//    }
+//    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

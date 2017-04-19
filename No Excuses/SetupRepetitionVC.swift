@@ -14,6 +14,7 @@ class SetupRepetitionVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0, green: 133/255, blue: 188/255, alpha: 1)
         
+        
         view.addSubview(pageTitle)
         view.addSubview(pageDescription)
         view.addSubview(repetitionInput)
@@ -26,15 +27,6 @@ class SetupRepetitionVC: UIViewController, UITextFieldDelegate {
         setupPageDescription()
         setupRepetitionInput()
         setupNextButton()
-        
-        let border = CALayer()
-        let width = CGFloat(2.0)
-        border.borderColor = UIColor.white.cgColor
-        border.frame = CGRect(x: 0, y: repetitionInput.frame.size.height - width, width:  repetitionInput.frame.size.width, height: repetitionInput.frame.size.height)
-        
-        border.borderWidth = width
-        repetitionInput.layer.addSublayer(border)
-        repetitionInput.layer.masksToBounds = true
         
         // Do any additional setup after loading the view.
         
@@ -55,7 +47,7 @@ class SetupRepetitionVC: UIViewController, UITextFieldDelegate {
     
     func setupPageTitle() {
         pageTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        pageTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
+        pageTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 24).isActive = true
         pageTitle.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
         pageTitle.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
@@ -64,7 +56,7 @@ class SetupRepetitionVC: UIViewController, UITextFieldDelegate {
         let label = UILabel()
         label.text = "How many times per week should I schedule workouts for you?"
         label.textColor = UIColor.white
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont.systemFont(ofSize: 17)
         label.textAlignment = .left
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -133,7 +125,7 @@ class SetupRepetitionVC: UIViewController, UITextFieldDelegate {
     
     func setupNextButton() {
         nextButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24).isActive = true
-        nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75).isActive = true
+        nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24).isActive = true
         nextButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     

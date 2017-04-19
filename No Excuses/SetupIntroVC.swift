@@ -14,12 +14,16 @@ class SetupIntroVC: UIViewController, GIDSignInUIDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 87/255, green: 71/255, blue: 221/225, alpha: 1)
-        view.addSubview(pageTitle)
-        view.addSubview(introLabel)
-        view.addSubview(smileyFace)
-        view.addSubview(briefingLabel)
-        view.addSubview(instructionLabel)
-        view.addSubview(signInButton)
+        
+        view.addSubview(baseScrollView)
+        setupScrollView()
+        
+        baseScrollView.addSubview(pageTitle)
+        baseScrollView.addSubview(introLabel)
+        baseScrollView.addSubview(smileyFace)
+        baseScrollView.addSubview(briefingLabel)
+        baseScrollView.addSubview(instructionLabel)
+        baseScrollView.addSubview(signInButton)
         setupPageTitle()
         setupIntroLabel()
         setupSmileyFace()
@@ -29,6 +33,24 @@ class SetupIntroVC: UIViewController, GIDSignInUIDelegate {
         // Do any additional setup after loading the view.
         
         GIDSignIn.sharedInstance().uiDelegate = self
+    }
+    
+    let baseScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.isScrollEnabled = true
+        scrollView.contentSize = CGSize(width: 320, height: 680)
+        scrollView.isUserInteractionEnabled = true
+        scrollView.bounces = false
+        scrollView.showsHorizontalScrollIndicator = false
+        return scrollView
+    }()
+    
+    func setupScrollView() {
+        baseScrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        baseScrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        baseScrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        baseScrollView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
     }
     
     let pageTitle: UILabel = {
@@ -42,9 +64,9 @@ class SetupIntroVC: UIViewController, GIDSignInUIDelegate {
     }()
     
     func setupPageTitle() {
-        pageTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        pageTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
-        pageTitle.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
+        pageTitle.centerXAnchor.constraint(equalTo: baseScrollView.centerXAnchor).isActive = true
+        pageTitle.topAnchor.constraint(equalTo: baseScrollView.topAnchor, constant: 24).isActive = true
+        pageTitle.widthAnchor.constraint(equalTo: baseScrollView.widthAnchor, constant: -24).isActive = true
         pageTitle.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
@@ -52,7 +74,7 @@ class SetupIntroVC: UIViewController, GIDSignInUIDelegate {
         let label = UILabel()
         label.text = "I'm your new personal assistant, Ynot. I will schedule all your workout sessions for you every week using your Google Calendars!"
         label.textColor = UIColor.white
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont.systemFont(ofSize: 17)
         label.textAlignment = .left
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
@@ -69,9 +91,9 @@ class SetupIntroVC: UIViewController, GIDSignInUIDelegate {
     
     let smileyFace: UILabel = {
         let label = UILabel()
-        label.text = ":)"
+        label.text = "🤗"
         label.textColor = UIColor.white
-        label.font = UIFont.boldSystemFont(ofSize: 80)
+        label.font = UIFont.boldSystemFont(ofSize: 120)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -88,7 +110,7 @@ class SetupIntroVC: UIViewController, GIDSignInUIDelegate {
         let label = UILabel()
         label.text = "I will only use the calendars you give me access to find the free time slots you have. \n\n Don't worry! \n\n I won't check where I'm not supposed to!"
         label.textColor = UIColor.white
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont.systemFont(ofSize: 17)
         label.textAlignment = .left
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
@@ -107,7 +129,7 @@ class SetupIntroVC: UIViewController, GIDSignInUIDelegate {
         let label = UILabel()
         label.text = "So let's start by giving me some instructions to start scheduling you to become who you want to be!"
         label.textColor = UIColor.white
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = UIFont.systemFont(ofSize: 17)
         label.textAlignment = .left
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
@@ -119,7 +141,7 @@ class SetupIntroVC: UIViewController, GIDSignInUIDelegate {
         instructionLabel.centerXAnchor.constraint(equalTo: pageTitle.centerXAnchor).isActive = true
         instructionLabel.topAnchor.constraint(equalTo: briefingLabel.bottomAnchor, constant: 24).isActive = true
         instructionLabel.widthAnchor.constraint(equalTo: pageTitle.widthAnchor).isActive = true
-        instructionLabel.heightAnchor.constraint(equalTo: pageTitle.heightAnchor).isActive = true
+        instructionLabel.heightAnchor.constraint(equalToConstant: 75).isActive = true
     }
     
     let signInButton: UIButton = {
@@ -154,9 +176,9 @@ class SetupIntroVC: UIViewController, GIDSignInUIDelegate {
     }
     
     func setUpSignInButton() {
-        signInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        signInButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75).isActive = true
-        signInButton.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
+        signInButton.centerXAnchor.constraint(equalTo: pageTitle.centerXAnchor).isActive = true
+        signInButton.topAnchor.constraint(equalTo: instructionLabel.bottomAnchor, constant: 24).isActive = true
+        signInButton.widthAnchor.constraint(equalTo: pageTitle.widthAnchor).isActive = true
         signInButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     

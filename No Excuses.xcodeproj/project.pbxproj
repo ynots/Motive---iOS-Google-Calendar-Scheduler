@@ -16,14 +16,14 @@
 		290CA0CB1E9211200095E808 /* Google-G.png in Resources */ = {isa = PBXBuildFile; fileRef = 290CA0CA1E9211200095E808 /* Google-G.png */; };
 		290CA0F61E9464270095E808 /* UISettingsDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290CA0F51E9464270095E808 /* UISettingsDisplayView.swift */; };
 		291738B51E8F2ABA00CDAC8F /* client_812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com.plist in Resources */ = {isa = PBXBuildFile; fileRef = 291738B41E8F2ABA00CDAC8F /* client_812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com.plist */; };
-		291738B71E8F311900CDAC8F /* DailyCalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 291738B61E8F311900CDAC8F /* DailyCalendarVC.swift */; };
 		29187C441E8B228300134598 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29187C431E8B228300134598 /* AppDelegate.swift */; };
-		29187C461E8B228300134598 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29187C451E8B228300134598 /* ViewController.swift */; };
 		29187C491E8B228300134598 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29187C471E8B228300134598 /* Main.storyboard */; };
 		29187C4C1E8B228300134598 /* No_Excuses.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 29187C4A1E8B228300134598 /* No_Excuses.xcdatamodeld */; };
 		29187C4E1E8B228300134598 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29187C4D1E8B228300134598 /* Assets.xcassets */; };
 		29187C511E8B228300134598 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29187C4F1E8B228300134598 /* LaunchScreen.storyboard */; };
 		29187C591E8B232400134598 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 29187C581E8B232400134598 /* GoogleService-Info.plist */; };
+		2929D6461EA1C76100387822 /* Inset Text Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2929D6451EA1C76100387822 /* Inset Text Field.swift */; };
+		29558F401EA7249A002C0F5A /* TonyShumLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 29558F3F1EA7249A002C0F5A /* TonyShumLogo.png */; };
 		E2B29ABC42085699BD61CE4B /* Pods_No_Excuses.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF1F4D2D7103BC9B6B5B99E0 /* Pods_No_Excuses.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,10 +37,8 @@
 		290CA0CA1E9211200095E808 /* Google-G.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Google-G.png"; sourceTree = "<group>"; };
 		290CA0F51E9464270095E808 /* UISettingsDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISettingsDisplayView.swift; sourceTree = "<group>"; };
 		291738B41E8F2ABA00CDAC8F /* client_812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "client_812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com.plist"; sourceTree = "<group>"; };
-		291738B61E8F311900CDAC8F /* DailyCalendarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailyCalendarVC.swift; sourceTree = "<group>"; };
 		29187C401E8B228300134598 /* No Excuses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "No Excuses.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29187C431E8B228300134598 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		29187C451E8B228300134598 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		29187C481E8B228300134598 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		29187C4B1E8B228300134598 /* No_Excuses.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = No_Excuses.xcdatamodel; sourceTree = "<group>"; };
 		29187C4D1E8B228300134598 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -48,7 +46,9 @@
 		29187C521E8B228300134598 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29187C581E8B232400134598 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		29187C5A1E8B248A00134598 /* No Excuses-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "No Excuses-Bridging-Header.h"; sourceTree = "<group>"; };
+		2929D6451EA1C76100387822 /* Inset Text Field.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Inset Text Field.swift"; sourceTree = "<group>"; };
 		292CE08A1E8ED9AB004E1B49 /* No Excuses.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "No Excuses.entitlements"; sourceTree = "<group>"; };
+		29558F3F1EA7249A002C0F5A /* TonyShumLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TonyShumLogo.png; sourceTree = "<group>"; };
 		43DC8DA63E5BBA82FFFA0BAB /* Pods-No Excuses.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-No Excuses.debug.xcconfig"; path = "Pods/Target Support Files/Pods-No Excuses/Pods-No Excuses.debug.xcconfig"; sourceTree = "<group>"; };
 		54BC4E6A35B1269553E52F20 /* Pods-No Excuses.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-No Excuses.release.xcconfig"; path = "Pods/Target Support Files/Pods-No Excuses/Pods-No Excuses.release.xcconfig"; sourceTree = "<group>"; };
 		DF1F4D2D7103BC9B6B5B99E0 /* Pods_No_Excuses.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_No_Excuses.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,8 +69,6 @@
 		290CA0BA1E91B24A0095E808 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				29187C451E8B228300134598 /* ViewController.swift */,
-				291738B61E8F311900CDAC8F /* DailyCalendarVC.swift */,
 				290CA0BE1E91B5A00095E808 /* WelcomeVC.swift */,
 				290CA0BC1E91B3360095E808 /* SetupIntroVC.swift */,
 				290CA0C01E91BC240095E808 /* SetupScheduleVC.swift */,
@@ -93,6 +91,7 @@
 		290CA0C91E920E5E0095E808 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				29558F3F1EA7249A002C0F5A /* TonyShumLogo.png */,
 				290CA0CA1E9211200095E808 /* Google-G.png */,
 			);
 			name = Assets;
@@ -102,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				290CA0F51E9464270095E808 /* UISettingsDisplayView.swift */,
+				2929D6451EA1C76100387822 /* Inset Text Field.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -233,6 +233,7 @@
 				29187C591E8B232400134598 /* GoogleService-Info.plist in Resources */,
 				290CA0CB1E9211200095E808 /* Google-G.png in Resources */,
 				29187C4E1E8B228300134598 /* Assets.xcassets in Resources */,
+				29558F401EA7249A002C0F5A /* TonyShumLogo.png in Resources */,
 				291738B51E8F2ABA00CDAC8F /* client_812989291150-9ikloce8f7c599v2fom2dffh4fqe1gkh.apps.googleusercontent.com.plist in Resources */,
 				29187C491E8B228300134598 /* Main.storyboard in Resources */,
 			);
@@ -293,15 +294,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29187C461E8B228300134598 /* ViewController.swift in Sources */,
 				290CA0C51E91BC570095E808 /* SetupRepetitionVC.swift in Sources */,
 				290CA0C11E91BC240095E808 /* SetupScheduleVC.swift in Sources */,
 				290CA0F61E9464270095E808 /* UISettingsDisplayView.swift in Sources */,
 				290CA0C81E91BEDD0095E808 /* UserInterfaceVC.swift in Sources */,
 				29187C441E8B228300134598 /* AppDelegate.swift in Sources */,
-				291738B71E8F311900CDAC8F /* DailyCalendarVC.swift in Sources */,
 				290CA0BF1E91B5A00095E808 /* WelcomeVC.swift in Sources */,
 				290CA0C31E91BC3E0095E808 /* SetupTimeVC.swift in Sources */,
+				2929D6461EA1C76100387822 /* Inset Text Field.swift in Sources */,
 				29187C4C1E8B228300134598 /* No_Excuses.xcdatamodeld in Sources */,
 				290CA0BD1E91B3360095E808 /* SetupIntroVC.swift in Sources */,
 			);
@@ -431,12 +431,14 @@
 				CODE_SIGN_ENTITLEMENTS = "No Excuses/No Excuses.entitlements";
 				DEVELOPMENT_TEAM = 874J72QHY8;
 				INFOPLIST_FILE = "No Excuses/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tonyshum.No-Excuses";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "No Excuses/No Excuses-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -449,11 +451,13 @@
 				CODE_SIGN_ENTITLEMENTS = "No Excuses/No Excuses.entitlements";
 				DEVELOPMENT_TEAM = 874J72QHY8;
 				INFOPLIST_FILE = "No Excuses/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tonyshum.No-Excuses";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "No Excuses/No Excuses-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

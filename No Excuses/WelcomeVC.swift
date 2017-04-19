@@ -28,9 +28,9 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate {
     
     let appHeadline: UILabel = {
         let label = UILabel()
-        label.text = "We find the time in your schedule.\n We create your workout session. \n So you reach your potential."
+        label.text = "Prioritize\n\nPersistence\n\nGrowth."
         label.textColor = UIColor.white
-        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textAlignment = NSTextAlignment.center
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -39,16 +39,16 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate {
     
     func setupAppHeadline() {
         appHeadline.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        appHeadline.bottomAnchor.constraint(equalTo: view.topAnchor, constant: 200).isActive = true
+        appHeadline.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -175).isActive = true
         appHeadline.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
         appHeadline.heightAnchor.constraint(equalToConstant: 125).isActive = true
     }
     
     let appTitleLbl: UILabel = {
         let label = UILabel()
-        label.text = "NO EXCUSES"
+        label.text = "MOTIVE"
         label.textColor = UIColor.white
-        label.font = UIFont.boldSystemFont(ofSize: 50)
+        label.font = UIFont.systemFont(ofSize: 50, weight: UIFontWeightBlack)
         label.textAlignment = NSTextAlignment.center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -74,7 +74,7 @@ class WelcomeVC: UIViewController, GIDSignInUIDelegate {
     
     func setupContinueButton() {
         continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        continueButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75).isActive = true
+        continueButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 200).isActive = true
         continueButton.widthAnchor.constraint(equalTo: appTitleLbl.widthAnchor).isActive = true
         continueButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }

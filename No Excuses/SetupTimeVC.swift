@@ -14,12 +14,6 @@ class SetupTimeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if self.dateFormatter == nil {
-            self.dateFormatter = DateFormatter()
-            self.dateFormatter?.dateStyle = .none
-            self.dateFormatter?.timeStyle = .short
-        }
-        
         view.backgroundColor = UIColor(red: 247/255, green: 147/255, blue: 30/255, alpha: 1)
         
         view.addSubview(pageTitle)
@@ -30,14 +24,6 @@ class SetupTimeVC: UIViewController {
         view.addSubview(toTimeInput)
         view.addSubview(nextButton)
         
-        if let fromTime: Date = UserDefaults.standard.value(forKey: "fromTime") as? Date {
-            fromTimeInput.text = dateFormatter?.string(from: fromTime)
-        }
-        
-        if let toTime: Date = UserDefaults.standard.value(forKey: "toTime") as? Date {
-            toTimeInput.text = dateFormatter?.string(from: toTime)
-        }
-        
         setupPageTitle()
         setupPageDescription()
         setupFromTimeInput()
@@ -46,6 +32,18 @@ class SetupTimeVC: UIViewController {
         setupToTimeInput()
         setupNextButton()
         // Do any additional setup after loading the view.
+        if self.dateFormatter == nil {
+            self.dateFormatter = DateFormatter()
+            self.dateFormatter?.dateStyle = .none
+            self.dateFormatter?.timeStyle = .short
+        }
+        if let fromTime: Date = UserDefaults.standard.value(forKey: "fromTime") as? Date {
+            fromTimeInput.text = dateFormatter?.string(from: fromTime)
+        }
+        
+        if let toTime: Date = UserDefaults.standard.value(forKey: "toTime") as? Date {
+            toTimeInput.text = dateFormatter?.string(from: toTime)
+        }
     }
     
     let pageTitle: UILabel = {
@@ -60,17 +58,17 @@ class SetupTimeVC: UIViewController {
     
     func setupPageTitle() {
         pageTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        pageTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
+        pageTitle.topAnchor.constraint(equalTo: view.topAnchor, constant: 24).isActive = true
         pageTitle.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
         pageTitle.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
     let pageDescription: UILabel = {
         let label = UILabel()
-        label.text = "When are you available to workout? Try to find the time when you are free from your commitments, meals and rest."
+        label.text = "When are you available to workout? \n\nTry to find the time when you are free from your commitments, meals and rest."
         label.textColor = UIColor.white
-        label.font = UIFont.boldSystemFont(ofSize: 18)
-        label.textAlignment = NSTextAlignment.center
+        label.font = UIFont.systemFont(ofSize: 17)
+        label.textAlignment = .left
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -80,7 +78,7 @@ class SetupTimeVC: UIViewController {
         pageDescription.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         pageDescription.topAnchor.constraint(equalTo: pageTitle.bottomAnchor, constant: 12).isActive = true
         pageDescription.widthAnchor.constraint(equalTo: pageTitle.widthAnchor).isActive = true
-        pageDescription.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        pageDescription.heightAnchor.constraint(equalToConstant: 125).isActive = true
     }
     
     /*
@@ -98,13 +96,13 @@ class SetupTimeVC: UIViewController {
     
     func setupFromTimeLabel() {
         fromTimeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        fromTimeLabel.bottomAnchor.constraint(equalTo: fromTimeInput.topAnchor, constant: -12).isActive = true
+        fromTimeLabel.topAnchor.constraint(equalTo: pageDescription.bottomAnchor, constant: 12).isActive = true
         fromTimeLabel.widthAnchor.constraint(equalTo: pageTitle.widthAnchor).isActive = true
         fromTimeLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
-    let fromTimeInput: UITextField = {
-        let tF = UITextField()
+    let fromTimeInput: InsetTextField = {
+        let tF = InsetTextField()
         tF.backgroundColor = .white
         tF.addTarget(self, action: #selector(timeFieldEditing), for: .editingDidBegin)
         tF.translatesAutoresizingMaskIntoConstraints = false
@@ -113,8 +111,8 @@ class SetupTimeVC: UIViewController {
     
     func setupFromTimeInput() {
         fromTimeInput.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        fromTimeInput.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: -12).isActive = true
-        fromTimeInput.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
+        fromTimeInput.topAnchor.constraint(equalTo: fromTimeLabel.bottomAnchor, constant: 12).isActive = true
+        fromTimeInput.widthAnchor.constraint(equalTo: pageTitle.widthAnchor).isActive = true
         fromTimeInput.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
@@ -130,13 +128,13 @@ class SetupTimeVC: UIViewController {
     
     func setupToTimeLabel() {
         toTimeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        toTimeLabel.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 12).isActive = true
+        toTimeLabel.topAnchor.constraint(equalTo: fromTimeInput.bottomAnchor, constant: 12).isActive = true
         toTimeLabel.widthAnchor.constraint(equalTo: pageTitle.widthAnchor).isActive = true
         toTimeLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
-    let toTimeInput: UITextField = {
-        let tF = UITextField()
+    let toTimeInput: InsetTextField = {
+        let tF = InsetTextField()
         tF.backgroundColor = .white
         tF.addTarget(self, action: #selector(timeFieldEditing), for: .editingDidBegin)
         tF.translatesAutoresizingMaskIntoConstraints = false
@@ -255,7 +253,7 @@ class SetupTimeVC: UIViewController {
     
     func setupNextButton() {
         nextButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -24).isActive = true
-        nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -75).isActive = true
+        nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24).isActive = true
         nextButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
